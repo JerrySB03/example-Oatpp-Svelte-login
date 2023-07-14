@@ -48,10 +48,6 @@
         color: #64ccc5;
     }
 
-    .navbar .active {
-        color: #176b87;
-    }
-    
   .github-logo {
     height: 1.5rem; 
     width: auto; 

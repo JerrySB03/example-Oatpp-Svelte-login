@@ -42,17 +42,6 @@ class DefaultController : public oatpp::web::server::api::ApiController {
         dto->client = connectionProperties.get("peer_address");
         return createDtoResponse(Status::CODE_200, dto);
     }
-    ENDPOINT_INFO(root) {
-        info->summary = "Root redirect";
-        info->description = "Root redirect endpoint to /api";
-
-        info->hide = true;
-    }
-    ENDPOINT("GET", "/", root) {
-        auto response = createResponse(Status::CODE_302, "");
-        response->putHeader("Location", "/api");
-        return response;
-    }
 };
 
 #include OATPP_CODEGEN_END(ApiController)

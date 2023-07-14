@@ -6,7 +6,7 @@
 #include "AppComponent.hpp"
 #include "Controller/DefaultController.hpp"
 #include "Controller/UserController.hpp"
-#include "Config/Config.hpp"
+#include "Controller/FrontendController.hpp"
 
 /**
  *  run() method.
@@ -14,9 +14,9 @@
  *  2) add ApiController's endpoints to router
  *  3) run server
  */
-void cliActivation() {
-    Config();
-    CommandLineInterface cli = CommandLineInterface();
+void serverStop() {
+    std::cout << "Press Enter to stop the server" << std::endl;
+    std::cin.ignore();
 }
 void run(const oatpp::base::CommandLineArguments& args) {
     AppComponent components(args);  // Create scope Environment components
@@ -29,6 +29,8 @@ void run(const oatpp::base::CommandLineArguments& args) {
     router->addController(DefaultController::createShared());
     docEndpoints.append(router->addController(UserController::createShared())->getEndpoints());
     router->addController(oatpp::swagger::Controller::createShared(docEndpoints));  // Register swagger-ui endpoint
+    router->addController(FrontendController::createShared()); // Register frontend controller, which serves static files - has lowest priority
+
     // create the server object
     oatpp::network::Server server(components.serverConnectionProvider.getObject(),
                                   components.serverConnectionHandler.getObject());
@@ -38,7 +40,7 @@ void run(const oatpp::base::CommandLineArguments& args) {
         server.run();
     });
     OATPP_LOGI("Server", "Running on port %s...", components.serverConnectionProvider.getObject()->getProperty("port").toString()->c_str());
-    cliActivation();
+    serverStop();
 
     // Now, check if server is still running and stop it if needed
     if (server.getStatus() == oatpp::network::Server::STATUS_RUNNING) {

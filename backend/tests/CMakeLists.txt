@@ -1,9 +1,9 @@
-add_executable(${project_name}-test
+add_executable(${PROJECT_NAME}-test
         test.cpp
 )
 
-target_link_libraries(${project_name}-test ${project_name}-core oatpp::oatpp-test)
-add_dependencies(${project_name}-test ${project_name}-core oatpp::oatpp-test)
+target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME}-core oatpp::oatpp-test)
+add_dependencies(${PROJECT_NAME}-test ${PROJECT_NAME}-core oatpp::oatpp-test)
 
 enable_testing()
-add_test(NAME ${project_name}-user-tests COMMAND ${project_name}-test)
+add_test(NAME ${PROJECT_NAME}-user-tests COMMAND ${PROJECT_NAME}-test)

@@ -25,6 +25,9 @@ add_definitions(
 
         ## Postgres server max connections, must be specified in the database
         -DPOSTGRESQL_MAX_CONN=1024
+
+        ## Frontend build directory
+        -DFRONTEND_BUILD_DIR="${CMAKE_CURRENT_SOURCE_DIR}/../frontend/build/"
 )
 include(CTest)
 
@@ -32,7 +35,7 @@ add_subdirectory(tests)
 add_subdirectory(src)
 add_subdirectory(lib)
 
-set_target_properties(${project_name}-core ${project_name}-exe ${project_name}-test PROPERTIES
+set_target_properties(${PROJECT_NAME}-core ${PROJECT_NAME}-exe ${PROJECT_NAME}-test PROPERTIES
         CXX_STANDARD 17
         CXX_EXTENSIONS OFF
         CXX_STANDARD_REQUIRED ON

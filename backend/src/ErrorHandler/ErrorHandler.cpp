@@ -17,18 +17,16 @@ ErrorHandler::handleError(const Status &status, const oatpp::String &message, co
             error->message = "Internal server error";
             error->status = "Database error";
 
-        } else {
-            if (error->status == nullptr) {
-                error->status = "Error";
-            }
+        } else if (error->status == nullptr) {
+            error->status = "Error";
         }
-
-        error->code = outStatus.code;
-        auto response = ResponseFactory::createResponse(outStatus, error, m_objectMapper);
-
-        for (const auto &pair : headers.getAll()) {
-            response->putHeader(pair.first.toString(), pair.second.toString());
-        }
-
-        return response;
     }
+    error->code = outStatus.code;
+    auto response = ResponseFactory::createResponse(outStatus, error, m_objectMapper);
+
+    for (const auto &pair : headers.getAll()) {
+        response->putHeader(pair.first.toString(), pair.second.toString());
+    }
+
+    return response;
+}

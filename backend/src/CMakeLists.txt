@@ -1,6 +1,7 @@
-add_library(${project_name}-core
+add_library(${PROJECT_NAME}-core
         Controller/UserController.hpp
         Controller/DefaultController.hpp
+        Controller/FrontendController.hpp
         AppComponent.hpp
         SwaggerComponent.hpp
         Users/Users.cpp
@@ -17,18 +18,19 @@ add_library(${project_name}-core
         DTOs/DTOs.hpp
         DTOs/UserDTOs.hpp
         DTOs/StatusDTO.hpp
-        DTOs/ConfigDTO.hpp
         Database/Models/UserModel.hpp
         Database/DatabaseComponent.hpp
         Database/UserDb.hpp
+        # frontend/frontend.hpp
+        # frontend/frontend.cpp
 )
 
-add_executable(${project_name}-exe
+add_executable(${PROJECT_NAME}-exe
     App.cpp    
 )
 
 # Link the library to oatpp
-target_link_libraries(${project_name}-core
+target_link_libraries(${PROJECT_NAME}-core
         PUBLIC oatpp::oatpp
         PUBLIC oatpp::oatpp-postgresql
         PUBLIC oatpp::oatpp-swagger
@@ -36,8 +38,8 @@ target_link_libraries(${project_name}-core
         PUBLIC jwt-cpp::jwt-cpp
 )
 
-target_include_directories(${project_name}-core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(${project_name}-exe ${project_name}-core) 
-add_dependencies(${project_name}-exe ${project_name}-core)
+target_include_directories(${PROJECT_NAME}-core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(${PROJECT_NAME}-exe ${PROJECT_NAME}-core) 
+add_dependencies(${PROJECT_NAME}-exe ${PROJECT_NAME}-core)
 
 include_directories(${OATPP_INCLUDE_DIRS})

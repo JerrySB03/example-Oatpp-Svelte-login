@@ -1,6 +1,9 @@
 #include "Interceptor.hpp"
 
 AuthInterceptor::AuthInterceptor() {
+    authEndpoints.route("GET", "/*", false);
+    authEndpoints.route("GET", "/api/*", true);
+
     authEndpoints.route("GET", "/api", false);
     authEndpoints.route("GET", "/", false);
 

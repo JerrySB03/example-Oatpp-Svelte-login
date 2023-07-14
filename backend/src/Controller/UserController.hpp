@@ -85,16 +85,6 @@ class UserController : public oatpp::web::server::api::ApiController {
         user->id = userId->toString();
         return createDtoResponse(Status::CODE_200, users->updateUser(user));
     }
-
-    ENDPOINT_INFO(getData) {
-        info->summary = "Get user data from Id from token";
-        info->description = "Get one user data by their Identificator, saved within their token";
-
-        info->addTag("Users");
-
-        info->addResponse<Object<UserDTO>>(Status::CODE_200, "application/json", "Success");
-        info->addResponse<Object<StatusDTO>>(Status::CODE_404, "application/json", "User doesn't exist");
-    }
     ENDPOINT_INFO(verifyToken) {
         info->summary = "Verify token";
         info->description = "Verify token and return user id";

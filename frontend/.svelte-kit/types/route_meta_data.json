@@ -1,5 +1,11 @@
 {
-	"/": [],
-	"/login": [],
-	"/login/signup": []
+	"/": [
+		"src/routes/+page.server.ts"
+	],
+	"/login": [
+		"src/routes/login/+page.server.ts"
+	],
+	"/login/signup": [
+		"src/routes/login/signup/+page.server.ts"
+	]
 }
