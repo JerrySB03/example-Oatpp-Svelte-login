@@ -1,0 +1,7 @@
+FROM postgres
+
+ENV POSTGRES_DB oatpp_svelte_example_login
+ENV POSTGRES_USER username
+ENV POSTGRES_PASSWORD password
+
+EXPOSE 5432/tcp
